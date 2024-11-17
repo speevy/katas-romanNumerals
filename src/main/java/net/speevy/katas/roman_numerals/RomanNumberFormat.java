@@ -12,7 +12,7 @@ public class RomanNumberFormat extends NumberFormat {
 
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
-        return null;
+        return toAppendTo;
     }
 
     @Override
