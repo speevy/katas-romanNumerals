@@ -12,15 +12,20 @@ public class RomanNumberFormat extends NumberFormat {
 
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
-        return formatDecade((int)number, toAppendTo);
+        int actualNumber = (int) number;
+        formatDecade(actualNumber/10, toAppendTo, new Decade('X', 'L', 'C'));
+        actualNumber %= 10;
+        formatDecade(actualNumber, toAppendTo, new Decade('I', 'V', 'X'));
+        return toAppendTo;
     }
 
-    private static StringBuffer formatDecade(int number, StringBuffer toAppendTo) {
+    private static StringBuffer formatDecade(int number, StringBuffer toAppendTo, Decade units) {
         switch (number) {
-            case 4 -> toAppendTo.append("IV");
-            case 9 -> toAppendTo.append("IX");
-            case 0,1,2,3 -> toAppendTo.repeat("I", number);
-            case 5,6,7,8 -> toAppendTo.append('V').repeat("I", number - 5);
+            case 4 -> toAppendTo.append(units.one()).append(units.five());
+            case 9 -> toAppendTo.append(units.one()).append(units.ten());
+            case 0,1,2,3 -> toAppendTo.repeat(String.valueOf(units.one()), number);
+            case 5,6,7,8 -> toAppendTo.append(units.five())
+                    .repeat(String.valueOf(units.one()), number - 5);
             default -> throw new IllegalArgumentException
                     ("Decade numbers must be between 0 and 9 included. Received " + number);
         }
@@ -31,4 +36,6 @@ public class RomanNumberFormat extends NumberFormat {
     public Number parse(String source, ParsePosition parsePosition) {
         throw new UnsupportedOperationException();
     }
+
+    record Decade(char one, char five, char ten) {}
 }
