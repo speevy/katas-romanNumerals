@@ -19,6 +19,10 @@ public class RomanNumberFormatTest {
             "8,'VIII'",
             "9,'IX'",
             "10,'X'",
+            "11,'XI'",
+            "14,'XIV'",
+            "15,'XV'",
+            "19,'XIX'",
             "20,'XX'",
             "30,'XXX'",
             "40,'XL'",
@@ -27,6 +31,7 @@ public class RomanNumberFormatTest {
             "70,'LXX'",
             "80,'LXXX'",
             "90,'XC'",
+            "99,'XCIX'",
     })
     void formatTest(int value, String roman) {
         // Given
