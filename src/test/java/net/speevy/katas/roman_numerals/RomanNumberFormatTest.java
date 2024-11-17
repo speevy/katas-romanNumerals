@@ -2,6 +2,7 @@ package net.speevy.katas.roman_numerals;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,5 +75,16 @@ public class RomanNumberFormatTest {
 
         // Then
         assertEquals(roman, result, "Roman number for %d should be %s".formatted(value, roman));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1, -10, -1000, 4000, 5000})
+    void unexistingNumbersInRomanNotationShouldFail(int value) {
+        // Given
+        var formatter = new RomanNumberFormat();
+
+        // When + Then
+        assertThrows(IllegalArgumentException.class,
+                () -> formatter.format(value));
     }
 }
