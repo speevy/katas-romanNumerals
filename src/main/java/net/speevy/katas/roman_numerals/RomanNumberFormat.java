@@ -12,18 +12,26 @@ public class RomanNumberFormat extends NumberFormat {
 
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
+        if (number <= 0L || number >= 4000L) {
+            throw new IllegalArgumentException("Number %d cannot be represented in Roman notation".formatted(number));
+        }
+
         int actualNumber = (int) number;
         toAppendTo.repeat("M", actualNumber/1000);
+
         actualNumber %= 1000;
         formatDecade(actualNumber/100, toAppendTo, new Decade('C', 'D', 'M'));
+
         actualNumber %= 100;
         formatDecade(actualNumber/10, toAppendTo, new Decade('X', 'L', 'C'));
+
         actualNumber %= 10;
         formatDecade(actualNumber, toAppendTo, new Decade('I', 'V', 'X'));
+
         return toAppendTo;
     }
 
-    private static StringBuffer formatDecade(int number, StringBuffer toAppendTo, Decade units) {
+    private static void formatDecade(int number, StringBuffer toAppendTo, Decade units) {
         switch (number) {
             case 4 -> toAppendTo.append(units.one()).append(units.five());
             case 9 -> toAppendTo.append(units.one()).append(units.ten());
@@ -33,7 +41,6 @@ public class RomanNumberFormat extends NumberFormat {
             default -> throw new IllegalArgumentException
                     ("Decade numbers must be between 0 and 9 included. Received " + number);
         }
-        return toAppendTo;
     }
 
     @Override
