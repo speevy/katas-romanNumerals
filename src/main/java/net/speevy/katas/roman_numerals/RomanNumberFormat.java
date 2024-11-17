@@ -12,23 +12,17 @@ public class RomanNumberFormat extends NumberFormat {
 
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
-        if (number == 4) {
-            toAppendTo.append("IV");
-            return toAppendTo;
-        }
-        if (number == 9) {
-            toAppendTo.append("IX");
-            return toAppendTo;
-        }
-        long iteration;
-        if (number >= 5) {
-            iteration = number - 5;
-            toAppendTo.append('V');
-        } else {
-            iteration = number;
-        }
-        for (long l=0; l < iteration; l++) {
-            toAppendTo.append('I');
+        return formatDecade((int)number, toAppendTo);
+    }
+
+    private static StringBuffer formatDecade(int number, StringBuffer toAppendTo) {
+        switch (number) {
+            case 4 -> toAppendTo.append("IV");
+            case 9 -> toAppendTo.append("IX");
+            case 0,1,2,3 -> toAppendTo.repeat("I", number);
+            case 5,6,7,8 -> toAppendTo.append('V').repeat("I", number - 5);
+            default -> throw new IllegalArgumentException
+                    ("Decade numbers must be between 0 and 9 included. Received " + number);
         }
         return toAppendTo;
     }
