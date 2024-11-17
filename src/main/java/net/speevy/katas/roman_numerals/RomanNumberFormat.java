@@ -13,6 +13,8 @@ public class RomanNumberFormat extends NumberFormat {
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
         int actualNumber = (int) number;
+        formatDecade(actualNumber/100, toAppendTo, new Decade('C', 'D', 'M'));
+        actualNumber %= 100;
         formatDecade(actualNumber/10, toAppendTo, new Decade('X', 'L', 'C'));
         actualNumber %= 10;
         formatDecade(actualNumber, toAppendTo, new Decade('I', 'V', 'X'));
