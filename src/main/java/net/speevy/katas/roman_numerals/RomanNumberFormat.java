@@ -16,11 +16,14 @@ public class RomanNumberFormat extends NumberFormat {
             toAppendTo.append("IV");
             return toAppendTo;
         }
-        if (number == 5) {
+        long iteration;
+        if (number >= 5) {
+            iteration = number - 5;
             toAppendTo.append('V');
-            return toAppendTo;
+        } else {
+            iteration = number;
         }
-        for (long l=0; l < number; l++) {
+        for (long l=0; l < iteration; l++) {
             toAppendTo.append('I');
         }
         return toAppendTo;
