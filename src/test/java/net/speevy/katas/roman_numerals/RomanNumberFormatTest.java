@@ -13,6 +13,7 @@ public class RomanNumberFormatTest {
             "2,'II'",
             "3,'III'",
             "4,'IV'",
+            "5,'V'"
     })
     void formatTest(int value, String roman) {
         // Given
