@@ -11,7 +11,8 @@ public class RomanNumberFormatTest {
     @CsvSource({
             "1,'I'",
             "2,'II'",
-            "3,'III'"
+            "3,'III'",
+            "4,'IV'",
     })
     void formatTest(int value, String roman) {
         // Given
