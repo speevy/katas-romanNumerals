@@ -12,6 +12,10 @@ public class RomanNumberFormat extends NumberFormat {
 
     @Override
     public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
+        if (number == 4) {
+            toAppendTo.append("IV");
+            return toAppendTo;
+        }
         for (long l=0; l < number; l++) {
             toAppendTo.append('I');
         }
