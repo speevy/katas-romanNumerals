@@ -53,6 +53,17 @@ public class RomanNumberFormatTest {
             "900,'CM'",
             "990,'CMXC'",
             "999,'CMXCIX'",
+            "1000,'M'",
+            "1001,'MI'",
+            "1009,'MIX'",
+            "1010,'MX'",
+            "1011,'MXI'",
+            "1099,'MXCIX'",
+            "1100,'MC'",
+            "1999,'MCMXCIX'",
+            "2000,'MM'",
+            "3000,'MMM'",
+            "3999,'MMMCMXCIX'",
     })
     void formatTest(int value, String roman) {
         // Given
