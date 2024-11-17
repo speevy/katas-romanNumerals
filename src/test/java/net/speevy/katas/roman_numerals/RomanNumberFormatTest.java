@@ -17,6 +17,7 @@ public class RomanNumberFormatTest {
             "6,'VI'",
             "7,'VII'",
             "8,'VIII'",
+            "9,'IX'",
     })
     void formatTest(int value, String roman) {
         // Given
